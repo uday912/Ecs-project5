@@ -43,7 +43,7 @@ pipeline {
         stage('Docker Run') {
             steps {
                 script {
-                    sh 'docker run -d -p 80:80 --rm --name myContainer ${registry}:latest'
+                    sh 'docker run -d -p 80:80 --rm --name ecscontainer ${registry}:latest'
                 }
             }
         }
