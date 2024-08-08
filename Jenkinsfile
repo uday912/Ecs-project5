@@ -40,10 +40,17 @@ pipeline {
             }
         }
         
+        stage('Stop previous containers') {
+            steps {
+                sh 'docker ps -f name=myContainer -q | xargs --no-run-if-empty docker container stop'
+                sh 'docker container ls -a -f name=myContainer -q | xargs -r docker container rm'
+            }
+        }
+
         stage('Docker Run') {
             steps {
                 script {
-                    sh 'docker run -d -p 80:80 --rm --name ecscontainer ${registry}:latest'
+                    sh 'docker run -d -p 80:80 --rm --name myContainer ${registry}:latest'
                 }
             }
         }
