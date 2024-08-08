@@ -119,8 +119,8 @@ pipeline {
                         --service-namespace ecs \
                         --scalable-dimension ecs:service:DesiredCount \
                         --resource-id service/${clusterName}/${serviceName} \
-                        --min-capacity 1 \
-                        --max-capacity 3 \
+                        --min-capacity 2 \
+                        --max-capacity 4 \
                         --region ${region}
                     """
 
