@@ -3,21 +3,21 @@ pipeline {
     environment {
         registry = "654654178716.dkr.ecr.us-east-1.amazonaws.com/ecs-jenkins"
         region = "us-east-1"
-        clusterName = "ecs-jenkins-cluster" 
-        serviceName = "ecs-jenkins-service-new" 
+        clusterName = "ecs-jenkins-cluster1" 
+        serviceName = "ecs-jenkins-service-new1" 
         containerName = "ecs-jenkins-container" 
         taskFamily = "ecs-jenkins-task-family" 
         cpu = "256" 
         memory = "512" 
-        executionRoleArn = "arn:aws:iam::123456789012:role/ecsTaskExecutionRole" // Your execution role ARN
-        loadBalancerArn = "arn:aws:elasticloadbalancing:us-east-1:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188" // Your ALB ARN
-        targetGroupArn = "arn:aws:elasticloadbalancing:us-east-1:123456789012:targetgroup/my-target-group/6d0ecf831eec9f09" // Your target group ARN
+        executionRoleArn = "arn:aws:iam::654654178716:role/ecsTaskExecutionRole" // Your execution role ARN
+        loadBalancerArn = "arn:aws:elasticloadbalancing:us-east-1:654654178716:loadbalancer/app/ecs-jenkins-alb/f9f4a844a13ccdf9" // Your ALB ARN
+        targetGroupArn = "arn:aws:elasticloadbalancing:us-east-1:654654178716:targetgroup/ecs-ecs-je-ecs-jenkins-service-n/24f4f924c1247f40" // Your target group ARN
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'github', url: 'https://github.com/uday912/Ecs-project-3.git'
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/uday912/Ecs-project5.git'
             }
         }
 
@@ -39,14 +39,7 @@ pipeline {
                 }
             }
         }
-
-        stage('Stop previous containers') {
-            steps {
-                sh 'docker ps -f name=myContainer -q | xargs --no-run-if-empty docker container stop'
-                sh 'docker container ls -a -f name=myContainer -q | xargs -r docker container rm'
-            }
-        }
-
+        
         stage('Docker Run') {
             steps {
                 script {
