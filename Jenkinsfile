@@ -9,9 +9,9 @@ pipeline {
         taskFamily = "ecs-jenkins-task-family" 
         cpu = "256" 
         memory = "512" 
-        executionRoleArn = "arn:aws:iam::654654178716:role/ecsTaskExecutionRole" // Your execution role ARN
-        loadBalancerArn = "arn:aws:elasticloadbalancing:us-east-1:654654178716:loadbalancer/app/ecs-jenkins-alb/f9f4a844a13ccdf9" // Your ALB ARN
-        targetGroupArn = "arn:aws:elasticloadbalancing:us-east-1:654654178716:targetgroup/ecs-ecs-je-ecs-jenkins-service-n/24f4f924c1247f40" // Your target group ARN
+        executionRoleArn = "arn:aws:iam::654654178716:role/ecsTaskExecutionRole"
+        loadBalancerArn = "arn:aws:elasticloadbalancing:us-east-1:654654178716:loadbalancer/app/ecs-jenkins-alb/f9f4a844a13ccdf9"
+        targetGroupArn = "arn:aws:elasticloadbalancing:us-east-1:654654178716:targetgroup/ecs-ecs-je-ecs-jenkins-service-n/24f4f924c1247f40"
     }
 
     stages {
@@ -75,8 +75,7 @@ pipeline {
                                 "containerPort": 80,
                                 "hostPort": 80
                             }],
-                            "memory": 512,
-                            
+                            "memory": ${memory}
                         }]' \
                         --region ${region}
                     """
